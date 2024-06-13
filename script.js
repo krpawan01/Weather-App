@@ -2,18 +2,21 @@
 const apiKey = "f3a3033297328ad0b7691010c6ad385f"
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
 
+// https://api.openweathermap.org/data/2.5/weather?&units=metric&q=dumka&appid=f3a3033297328ad0b7691010c6ad385f
+
 const searchBox = document.querySelector(".search input")
 const searchBtn = document.querySelector('.search button');
 const weatherIcons = document.querySelector('.weather-icon');
 
 async function checkWeather(city) {
     const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+    console.log("response", response)
     if (response.status == 404) {
         document.querySelector('.error').style.display = 'block'
         document.querySelector('.weather').style.display = 'none'
     } else {
         var data = await response.json();
-        console.log(data)
+        console.log("data", data)
 
         document.querySelector('.city').innerHTML = data.name;
         document.querySelector('.temp').innerHTML = Math.floor(data.main.temp) + "°C";
